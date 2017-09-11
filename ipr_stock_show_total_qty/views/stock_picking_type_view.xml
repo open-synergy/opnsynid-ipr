@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<record id="stock_picking_type_view_form" model="ir.ui.view">
+    <field name="name">Stock Picking Type Form</field>
+    <field name="model">stock.picking.type</field>
+    <field name="inherit_id" ref="stock.view_picking_type_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//group[last()]" position="after">
+            <group name="grp_view_show_qty" col="4" colspan="4" string="Show Qty Layout">
+                <field name="qty_ok"/>
+            </group>
+        </xpath>
+    </field>
+</record>
+</data>
+</openerp>
