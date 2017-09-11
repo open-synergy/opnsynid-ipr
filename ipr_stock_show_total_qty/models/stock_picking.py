@@ -14,7 +14,7 @@ class StockPicking(models.Model):
         "state",
         "picking_type_id.qty_ok"
     )
-    def _compute_policy(self):
+    def _compute_qty_policy(self):
         user_id = self.env.user.id
         for picking in self:
             picking_type = picking.picking_type_id
@@ -29,7 +29,7 @@ class StockPicking(models.Model):
 
     show_qty = fields.Boolean(
         string="Show Qty",
-        compute="_compute_policy",
+        compute="_compute_qty_policy",
         store=False,
     )
 
