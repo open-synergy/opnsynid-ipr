@@ -17,7 +17,6 @@ class StockPicking(models.Model):
     def _compute_qty_policy(self):
         user_id = self.env.user.id
         for picking in self:
-            picking_type = picking.picking_type_id
             if user_id == SUPERUSER_ID:
                 picking.show_qty = True
                 continue
@@ -42,5 +41,6 @@ class StockPicking(models.Model):
     @api.depends(
         'move_lines', 'move_lines.product_uom_qty')
     def _compute_total_qty(self):
-        total_qty = sum(self.move_lines.mapped('product_uom_qty'))
-        self.total_qty = total_qty
+        for picking in self:
+            total_qty = sum(picking.move_lines.mapped('product_uom_qty'))
+            picking.total_qty = total_qty
