@@ -11,7 +11,7 @@
     "installable": True,
     "depends": [
         "report_aeroo",
-        "point_of_sale"
+        "pos_restaurant_table_management"
     ],
     "data": [
         "reports/pos_hourly_sale_reports.xml",
