@@ -126,7 +126,10 @@ class Parser(report_sxw.rml_parse):
                     for order in obj_pos_order.browse(
                             self.cr, self.uid, order_ids):
                         if order.table_id:
-                            customer_dine_in += 1
+                            if order.guest > 0:
+                                customer_dine_in += order.guest
+                            else:    
+                                customer_dine_in += 1
                             amount_dine_in += order.amount_total
                         else:
                             customer_take_away += 1
