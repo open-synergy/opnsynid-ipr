@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+<record id="print_pos_sale_summary_view_form" model="ir.ui.view">
+    <field name="name">Wizard PoS Sales Summary Form</field>
+    <field name="model">stock.print_pos_sale_summary</field>
+    <field name="arch" type="xml">
+        <form string="Print PoS Sales Summary">
+            <group name="group_1" colspan="4" col="2">
+                <field name="company_id"/>
+                <field name="date"/>
+                <field name="config_ids"/>
+            </group>
+            <footer>
+                <button name="action_print"
+                        type="object"
+                        string="Print"
+                        class="oe_highlight"/>
+                or
+                <button special="cancel"
+                        string="Cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="print_pos_sale_summary_action" model="ir.actions.act_window">
+    <field name="name">Print PoS Sales Summary</field>
+    <field name="res_model">stock.print_pos_sale_summary</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<menuitem
+    id="print_pos_sale_summary_menu"
+    name="Sales Summary"
+    parent="point_of_sale.menu_point_rep"
+    action="print_pos_sale_summary_action"
+    sequence="1001"
+/>
+
+</data>
+</openerp>
