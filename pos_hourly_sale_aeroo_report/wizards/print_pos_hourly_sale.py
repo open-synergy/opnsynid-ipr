@@ -4,8 +4,6 @@
 
 from datetime import datetime
 from openerp import api, models, fields
-from openerp.tools.translate import _
-from openerp.exceptions import Warning as UserError
 
 
 class PrintHourlySale(models.TransientModel):
@@ -27,7 +25,8 @@ class PrintHourlySale(models.TransientModel):
         comodel_name="pos.config",
         relation="pos_config_hourly_sale_rel",
         column1="wizard_id",
-        column2="config_id"
+        column2="config_id",
+        required=True
     )
 
     @api.multi

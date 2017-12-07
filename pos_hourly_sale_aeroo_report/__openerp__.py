@@ -4,7 +4,7 @@
 {
     "name": "PoS Hourly Sales Aeroo Report",
     "version": "8.0.1.0.0",
-    "category": "Stock",
+    "category": "Point Of Sale",
     "website": "https://opensynergy-indonesia.com/",
     "author": "OpenSynergy Indonesia",
     "license": "AGPL-3",
