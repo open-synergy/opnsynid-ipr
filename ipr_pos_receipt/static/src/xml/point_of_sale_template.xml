@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+       
+<templates id="template" xml:space="preserve">
+    
+    <t t-extend="XmlReceipt">
+        <t t-jquery="[t-if='receipt.company.logo']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='!receipt.company.logo']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.shop.name']" t-operation='replace'>
+            <div line-ratio='0.6'>
+                <line size='double-height'>
+                    <left><t t-esc='receipt.config_name'/></left>
+                    <right><t t-esc='receipt.date.date'/>-<t t-esc='receipt.date.month_name'/>-<t t-esc='receipt.date.year'/> </right>
+                </line>
+                <line size='double-height'>
+                    <right align="right"><t t-esc='receipt.date.hour'/>:<t t-esc='receipt.date.minute'/>:<t t-esc='receipt.date.seconds'/></right>
+                </line>
+            </div>
+            <br />
+        </t>
+        <t t-jquery="[t-if='receipt.company.contact_address']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.phone']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.vat']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.email']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.website']" t-operation='replace'>
+            <t t-if='receipt.table'>
+                <div class="pos-center-align">
+                    <h2>** DINE IN **</h2>
+                </div>
+                <br />
+            </t>
+            <t t-if='!receipt.table'>
+                <div class="pos-center-align">
+                    <h2>** TAKE AWAY **</h2>
+                </div>
+                <br />
+            </t>
+        </t>
+        <t t-jquery="[t-if='receipt.cashier']" t-operation='replace'>
+            <div line-ratio='0.6'>
+                <line>
+                    <left align="left">CASHIER : <t t-esc='receipt.cashier'/></left>
+                    <right align="right">Cover : 1</right>
+                </line>
+            </div>
+            <div>========================================</div>
+        </t>
+        <t t-jquery="[t-if='!taxincluded']" t-operation='before'>
+            <div line-ratio='0.6'>
+                <t t-if="receipt.wk_get_discount">
+                    <line>
+                        <right>--------</right>
+                    </line>
+                    <line>
+                        <right>
+                            <value>
+                                <t t-esc="receipt.subtotal" />
+                            </value>
+                        </right>
+                    </line>
+                    <line>
+                        <left>Discount <t t-esc="receipt.get_discount_value"/></left>
+                        <right>
+                            <value>
+                                <t t-esc="receipt.wk_get_discount"/>
+                            </value>
+                        </right>
+                    </line>
+                </t>
+            </div>
+        </t>
+        <t t-jquery="[t-if='!taxincluded']" t-operation='replace'>
+            <t t-if='!taxincluded'>
+                <line>
+                    <right>--------</right>
+                </line>
+                <line>
+                    <right>
+                        <value>
+                            <t t-esc="receipt.total_without_tax"/>
+                        </value>
+                    </right>
+                </line>
+                <t t-foreach='receipt.tax_details' t-as='tax'>
+                    <line>
+                        <left><t t-esc='tax.name' /></left>
+                        <right><value><t t-esc='tax.amount' /></value></right>
+                    </line>
+                </t>
+            </t>
+        </t>
+        <t t-jquery="[t-esc='receipt.total_with_tax']" t-operation='replace'>
+            <t t-esc="receipt.total_with_tax"/>
+        </t>
+        <t t-jquery="[t-foreach='receipt.paymentlines']" t-operation='replace'>
+            <line>
+                <right>--------</right>
+            </line>
+            <line size='double-height'>
+                <left><pre>        PAID</pre></left>
+                <right><value><t t-esc='receipt.total_paid'/></value></right>
+            </line>
+            <br/>
+            <t t-foreach='receipt.paymentlines' t-as='line'>
+                <t t-if='line.payment_bank'>
+                    <line indent='1'>
+                        <left><t t-esc='line.payment_name' /></left>
+                        <right><value><t t-esc='line.amount'/></value></right>
+                    </line>
+                </t>
+                <t t-if='!line.payment_bank'>
+                    <line indent='1'>
+                        <left><t t-esc='line.journal' /></left>
+                        <right><value><t t-esc='line.amount'/></value></right>
+                    </line>
+                </t>
+            </t>
+        </t>
+        <t t-jquery="[t-if='receipt.footer']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-esc='receipt.name']" t-operation='after'>
+            <t t-if='receipt.footer'>
+                <br/>
+                <br/>
+                <div class="pos-center-align">
+                    <h2><t t-esc='receipt.footer'/></h2>
+                </div>
+            </t>
+            <br />
+            <div class="pos-center-align">
+                <h2>** TERIMA KASIH **</h2>
+            </div>
+        </t>
+        <t t-jquery="[t-esc='receipt.date.localestring']" t-operation='replace'>
+        </t>
+    </t> 
+
+</templates>
+
+    
