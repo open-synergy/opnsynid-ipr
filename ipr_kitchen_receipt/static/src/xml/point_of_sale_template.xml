@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+       
+<templates id="template" xml:space="preserve">
+    
+    <t t-extend="OrderChangeReceipt">
+        <t t-jquery="[t-esc='changes.name']" t-operation='after'>
+        	<t t-if='changes.customer'>
+            	<div>Customer: <t t-esc="changes.customer" /></div>
+        	</t>
+        	<t t-if='changes.table'>
+            	<div>Table: <t t-esc="changes.table.table_name" /></div>
+        	</t>
+        </t>
+
+    </t> 
+</templates>
+
