@@ -4,14 +4,99 @@
     
     <t t-extend="OrderChangeReceipt">
         <t t-jquery="[t-esc='changes.name']" t-operation='after'>
+                <div font='b'>
+                    <t t-esc='changes.date.date'/>-<t t-esc='changes.date.month_name'/>-<t t-esc='changes.date.year'/>
+                </div>
         	<t t-if='changes.customer'>
             	<div>Customer: <t t-esc="changes.customer" /></div>
         	</t>
-        	<t t-if='changes.table'>
-            	<div>Table: <t t-esc="changes.table.table_name" /></div>
+        	<t t-if='changes.table.table_name'>
+            	<div font='b'>Table: <t t-esc="changes.table.table_name" /></div>
         	</t>
         </t>
 
     </t> 
+
+    <t t-extend="BillReceipt">
+        <t t-jquery="[t-if='receipt.company.logo']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='!receipt.company.logo']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.shop.name']" t-operation='replace'>
+            <t t-if='receipt.shop.name'>
+                <div><t t-esc='receipt.shop.name' /></div>
+            </t>
+            <t t-if='receipt.shop_address.contact_address'>
+                <div><t t-esc='receipt.shop_address.contact_address' /></div>
+            </t>
+            <t t-if='receipt.shop_address.phone'>
+                <div>Tel:<t t-esc='receipt.shop_address.phone' /></div>
+            </t>
+            <t t-if='receipt.shop_address.vat'>
+                <div>VAT:<t t-esc='receipt.shop_address.vat' /></div>
+            </t>
+            <t t-if='receipt.shop_address.email'>
+                <div><t t-esc='receipt.shop_address.email' /></div>
+            </t>
+            <t t-if='receipt.shop_address.website'>
+                <div><t t-esc='receipt.shop_address.website' /></div>
+            </t>
+            <br />
+        </t>
+        <t t-jquery="[t-if='receipt.company.contact_address']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.phone']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.vat']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.email']" t-operation='replace'>
+        </t>
+        <t t-jquery="[t-if='receipt.company.website']" t-operation='replace'>
+            <div class="pos-center-align">
+                <h2>** BILL **</h2>
+            </div>
+            <br />
+            <t t-if='receipt.table'>
+                <div line-ratio='0.6'>
+                    <line>
+                        <left align="left">TABLE: <t t-esc="receipt.table.table_name" /></left>
+                    </line>
+                </div>
+            </t>
+            <t t-if='receipt.client'>
+                <div line-ratio='0.6'>
+                    <line>
+                        <left align="left">CUSTOMER : <t t-esc="receipt.client" /></left>
+                    </line>
+                </div>
+            </t>
+        </t>
+        <t t-jquery="[t-if='receipt.cashier']" t-operation='replace'>
+            <div line-ratio='0.6'>
+                <line>
+                    <left align="left">CASHIER : <t t-esc='receipt.cashier'/></left>
+                    <right align="right">Cover : 1</right>
+                </line>
+            </div>
+            <div>========================================</div>
+        </t>
+        <t t-jquery="[t-esc='receipt.name']" t-operation='after'>
+            <t t-if='receipt.footer'>
+                <br/>
+                <br/>
+                <div class="pos-center-align">
+                    <h2><t t-esc='receipt.footer'/></h2>
+                </div>
+            </t>
+            <br />
+            <t t-esc='receipt.date.date'/>-<t t-esc='receipt.date.month_name'/>-<t t-esc='receipt.date.year'/>
+            <t t-esc='receipt.date.hour'/>:<t t-esc='receipt.date.minute'/>:<t t-esc='receipt.date.seconds'/>
+            <br />
+        </t>
+        <t t-jquery="[t-esc='receipt.date.localestring']" t-operation='replace'>
+        </t>
+
+    </t> 
+
 </templates>
 

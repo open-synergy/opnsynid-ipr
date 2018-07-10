@@ -12,8 +12,22 @@ openerp.ipr_kitchen_receipt = function(instance){
         },
         computeChanges: function(categories){
             var res = _super.prototype.computeChanges.apply(this,arguments);
-            var json    = this.export_as_JSON();  
+            var json    = this.export_as_JSON();
+            var date = new Date();
+            locale = "en-us"
+
             res.customer = json.customer;
+            res.date = { 
+                year: date.getFullYear(), 
+                month: date.getMonth(),
+                month_name: date.toLocaleString(locale, { month: "short" }),
+                date: date.getDate(),
+                day: date.getDay(),
+                hour: date.getHours(), 
+                minute: date.getMinutes() ,
+                isostring: date.toISOString(),
+                localestring: date.toLocaleString(),
+            };
             return res;
         },
     });
