@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="res_company_view_form">
+            <field name="name">Company - Accurate Information</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="supplier_invoice_export_accurate.res_company_view_form"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='accurate_branch_code']" position="after">
+                        <field name="accurate_pos_ar_account"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
