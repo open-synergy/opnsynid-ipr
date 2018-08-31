@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="pos_order_accurate_xml_report" model="ir.actions.report.xml">
+            <field name="name">Accurate: Export PoS Order</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">pos.order_summary</field>
+            <field name="report_name">aeroo_reportPosOrderAccurate</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="out_format" ref="report_aeroo.report_mimetypes_raw"/>
+            <field name="report_rml">ipr_pos_order_export_accurate/reports/template_pos_order_accurate.xml</field>
+            <field name="parser_loc">ipr_pos_order_export_accurate/reports/report_pos_order_accurate.py</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+            <field name="content_fname">xml</field>
+        </record>   
+    </data>
+</openerp>
+
