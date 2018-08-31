@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+        <record id="pos_order_export_accurate_view_form" model="ir.ui.view">
+            <field name="name">pos.order_export_accurate form</field>
+            <field name="model">pos.order_export_accurate</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group name="group_1" colspan="4" col="2">
+                        <field name="description"/>
+                        <field name="accurate_invoice_no"/>
+                        <field name="warehouse_id"/>
+                        <field name="date"/>
+                    </group>
+                    <footer>
+                        <button name="action_print_xml"
+                            type="object"
+                            string="Export"
+                            class="oe_hightlight"/>
+                        <button special="cancel"
+                                string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="pos_order_export_accurate_view_action" model="ir.actions.act_window">
+            <field name="name">Accurate: Export PoS Order</field>
+            <field name="res_model">pos.order_export_accurate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="pos_order_export_accurate_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="pos_order_export_accurate_menu"
+            name="Accurate: Export PoS Order"
+            parent="point_of_sale.menu_point_of_sale"
+            action="pos_order_export_accurate_view_action"
+            sequence="99"
+        />
+    </data>
+</openerp>

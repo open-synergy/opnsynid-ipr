@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NMEXML 
+    ACCOUNTANTCOPYID=""
+    BranchCode="${get_branch_code()}"
+    EximID="122">
+    <TRANSACTIONS OnError="CONTINUE">
+        <SALESINVOICE
+            operation="Add"
+            REQUESTID="1">
+            <TRANSACTIONID></TRANSACTIONID>
+            {% for data in get_data() %}\
+                <ITEMLINE operation="Add">
+                    <KEYID>${data.key_id}</KEYID>
+                    <ITEMNO>${data.item_no}</ITEMNO>
+                    <QUANTITY>${data.total_qty}</QUANTITY>
+                    <ITEMUNIT />
+                    <UNITRATION>1</UNITRATIO>
+                    <ITEMRESERVED1 />
+                    <ITEMRESERVED2 />
+                    <ITEMRESERVED3 />
+                    <ITEMRESERVED4 />
+                    <ITEMRESERVED5 />
+                    <ITEMRESERVED6 />
+                    <ITEMRESERVED7 />
+                    <ITEMRESERVED8 />
+                    <ITEMRESERVED9 />
+                    <ITEMRESERVED10 />
+                    <ITEMOVDESC>${data.itemovdesc}</ITEMOVDESC>
+                    <UNITPRICE>${data.unit_price}</UNITPRICE>
+                    <ITEMDISCPC />
+                    <TAXCODES>M</TAXCODES>
+                    <PROJECTID>22</PROJECTID>
+                    <DEPTID>${get_accurate_info()['accurate_dept_id']}</DEPTID>
+                    <SOSEQ />
+                    <BRUTOUNITPRICE>${data.total_price / data.total_qty}</BRUTOUNITPRICE>
+                    <WAREHOUSEID>${get_accurate_info()['accurate_warehouse_id']}</WAREHOUSEID>
+                    <QTYCONTROL />
+                    <DOSEQ />
+                    <DOID />
+                    <LOQTY>0</LOQTY>
+                    <TRANSFERPRICE></TRANSFERPRICE>
+                    <CATEGORY>${data.category}</CATEGORY>
+                    <ITEMDISCOUNT>${data.total_discount}</ITEMDISCOUNT>
+                    <AMOUNT>${data.total_price}</AMOUNT>
+                </ITEMLINE>
+            {% end %}\
+            <INVOICENO>${get_invoice_no()}</INVOICENO>
+            <INVOICEDATE>${get_date()}</INVOICEDATE>
+            <TAX1ID>M</TAX1ID>
+            <TAX1CODE>M</TAX1CODE>
+            <TAX2ID></TAX2ID>
+            <TAX2CODE></TAX2CODE>
+            <TAX1RATE>10</TAX1RATE>
+            <TAX2RATE></TAX2RATE>
+            <RATE>1</RATE>
+            <INCLUSIVETAX>0</INCLUSIVETAX>
+            <CUSTOMERISTAXABLE>1</CUSTOMERISTAXABLE>
+            <CASHDISCOUNT>0.0</CASHDISCOUNT>
+            <CASHDISCPC />
+            <INVOICEAMOUNT>${get_total()}</INVOICEAMOUNT>
+            <FREIGHT>0</FREIGHT>
+            <TERMSID>C.O.D</TERMSID>
+            <FOB />
+            <PURCHASEORDERNO />
+            <WAREHOUSEID>${get_accurate_info()['accurate_warehouse_id']}</WAREHOUSEID>
+            <DESCRIPTION>${get_description()}</DESCRIPTION>
+            <SHIPDATE>${get_date()}</SHIPDATE>
+            <DELIVERYORDER />
+            <FISCALRATE>1</FISCALRATE>
+            <TAXDATE>${get_date()}</TAXDATE>
+            <CUSTOMERID>${get_accurate_info()['accurate_customer_id']}</CUSTOMERID>
+            <PRINTED>0</PRINTED>
+            <SHIPTO1>${get_accurate_info()['accurate_warehouse_id']}</SHIPTO1>
+            <SHIPTO2 />
+            <SHIPTO3 />
+            <SHIPTO4 />
+            <SHIPTO5 />
+            <ARACCOUNT>${get_ar_account()}</ARACCOUNT>
+            <TAXFORMNUMBER />
+            <TAXFORMCODE />
+            <CURRENCYNAME>IDR</CURRENCYNAME>
+        </SALESINVOICE>
+    </TRANSACTIONS>
+</NMEXML>
