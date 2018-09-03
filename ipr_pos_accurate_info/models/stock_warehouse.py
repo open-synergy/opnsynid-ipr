@@ -23,3 +23,6 @@ class StockWarehouse(models.Model):
     accurate_ar_account = fields.Char(
         string="PoS AR Account"
     )
+    accurate_branch_code = fields.Char(
+        string="PoS Branch Code"
+    )
