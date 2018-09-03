@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Accurate Information for PoS",
-    "version": "8.0.1.0.0",
+    "version": "8.0.2.0.0",
     "category": "Point Of Sale",
     "website": "https://opensynergy-indonesia.com",
     "author": "OpenSynergy Indonesia",
@@ -13,7 +13,6 @@
         "point_of_sale"
     ],
     "data": [
-        "views/stock_warehouse_view.xml",
-        "views/res_company_view.xml"
+        "views/stock_warehouse_view.xml"
     ]
 }
