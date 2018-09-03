@@ -14,6 +14,8 @@
                                 <field name="accurate_dept_id"/>
                                 <field name="accurate_warehouse_id"/>
                                 <field name="accurate_customer_id"/>
+                                <field name="accurate_kode_warehouse"/>
+                                <field name="accurate_ar_account"/>
                             </group>
                         </page>
                     </xpath>

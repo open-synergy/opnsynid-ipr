@@ -17,3 +17,9 @@ class StockWarehouse(models.Model):
     accurate_customer_id = fields.Char(
         string="CUSTOMERID"
     )
+    accurate_kode_warehouse = fields.Char(
+        string="Kode Warehouse"
+    )
+    accurate_ar_account = fields.Char(
+        string="PoS AR Account"
+    )
