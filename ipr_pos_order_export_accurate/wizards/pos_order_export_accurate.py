@@ -8,13 +8,6 @@ from openerp import api, models, fields
 class PosOrderExportAccurate(models.TransientModel):
     _name = "pos.order_export_accurate"
 
-    description = fields.Text(
-        string="Description"
-    )
-    accurate_invoice_no = fields.Char(
-        string="Accurate(INVOICENO)",
-        required=True
-    )
     warehouse_id = fields.Many2one(
         string="Warehouse",
         comodel_name="stock.warehouse",
