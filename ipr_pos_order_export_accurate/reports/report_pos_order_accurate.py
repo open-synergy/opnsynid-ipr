@@ -15,7 +15,6 @@ class Parser(report_sxw.rml_parse):
         self.localcontext.update({
             "time": time,
             "get_data": self._get_data,
-            "get_branch_code": self.get_branch_code,
             "get_accurate_info": self.get_accurate_info,
             "get_date": self.get_date,
             "get_total": self.get_total,
@@ -36,12 +35,6 @@ class Parser(report_sxw.rml_parse):
 
     def get_total(self):
         return self.total
-
-    def get_branch_code(self):
-        obj_user = self.pool.get("res.users")
-        user = obj_user.browse(self.cr, self.uid, [self.uid])[0]
-
-        return user.company_id.accurate_branch_code
 
     def get_accurate_info(self):
         res={}
@@ -65,6 +58,7 @@ class Parser(report_sxw.rml_parse):
                     res["invoice_no"] = ""
             else:
                 res["accurate_dept_id"] = ""
+                res["invoice_no"] = ""
             if wh.accurate_warehouse_id:
                 res["accurate_warehouse_id"] = wh.accurate_warehouse_id
                 res["description"] = "OMSET %s %s" % (
@@ -82,6 +76,10 @@ class Parser(report_sxw.rml_parse):
                 res["accurate_ar_account"] = wh.accurate_ar_account
             else:
                 res["accurate_ar_account"] = ""
+            if wh.accurate_branch_code:
+                res["accurate_branch_code"] = wh.accurate_branch_code
+            else:
+                res["accurate_branch_code"] = ""
         return res
 
     def _get_data(self):

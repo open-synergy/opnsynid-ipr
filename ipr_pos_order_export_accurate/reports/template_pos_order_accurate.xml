@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <NMEXML 
     ACCOUNTANTCOPYID=""
-    BranchCode="${get_branch_code()}"
+    BranchCode="${get_accurate_info()['accurate_branch_code']}"
     EximID="122">
     <TRANSACTIONS OnError="CONTINUE">
         <SALESINVOICE
