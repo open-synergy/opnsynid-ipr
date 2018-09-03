@@ -10,10 +10,8 @@
             <field name="arch" type="xml">
                 <form>
                     <group name="group_1" colspan="4" col="2">
-                        <field name="description"/>
-                        <field name="accurate_invoice_no"/>
-                        <field name="warehouse_id"/>
                         <field name="date"/>
+                        <field name="warehouse_id"/>
                     </group>
                     <footer>
                         <button name="action_print_xml"

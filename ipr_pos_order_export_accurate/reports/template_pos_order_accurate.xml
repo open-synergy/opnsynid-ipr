@@ -14,7 +14,7 @@
                     <ITEMNO>${data.item_no}</ITEMNO>
                     <QUANTITY>${data.total_qty}</QUANTITY>
                     <ITEMUNIT />
-                    <UNITRATION>1</UNITRATIO>
+                    <UNITRATIO>1</UNITRATIO>
                     <ITEMRESERVED1 />
                     <ITEMRESERVED2 />
                     <ITEMRESERVED3 />
@@ -44,7 +44,7 @@
                     <AMOUNT>${data.total_price}</AMOUNT>
                 </ITEMLINE>
             {% end %}\
-            <INVOICENO>${get_invoice_no()}</INVOICENO>
+            <INVOICENO>${get_accurate_info()['invoice_no']}</INVOICENO>
             <INVOICEDATE>${get_date()}</INVOICEDATE>
             <TAX1ID>M</TAX1ID>
             <TAX1CODE>M</TAX1CODE>
@@ -63,7 +63,7 @@
             <FOB />
             <PURCHASEORDERNO />
             <WAREHOUSEID>${get_accurate_info()['accurate_warehouse_id']}</WAREHOUSEID>
-            <DESCRIPTION>${get_description()}</DESCRIPTION>
+            <DESCRIPTION>${get_accurate_info()['description']}</DESCRIPTION>
             <SHIPDATE>${get_date()}</SHIPDATE>
             <DELIVERYORDER />
             <FISCALRATE>1</FISCALRATE>
@@ -75,7 +75,7 @@
             <SHIPTO3 />
             <SHIPTO4 />
             <SHIPTO5 />
-            <ARACCOUNT>${get_ar_account()}</ARACCOUNT>
+            <ARACCOUNT>${get_accurate_info()['accurate_ar_account']}</ARACCOUNT>
             <TAXFORMNUMBER />
             <TAXFORMCODE />
             <CURRENCYNAME>IDR</CURRENCYNAME>

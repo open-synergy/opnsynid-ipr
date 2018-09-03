@@ -4,6 +4,7 @@
 
 import time
 from openerp.report import report_sxw
+from datetime import datetime
 
 
 class Parser(report_sxw.rml_parse):
@@ -15,30 +16,23 @@ class Parser(report_sxw.rml_parse):
             "time": time,
             "get_data": self._get_data,
             "get_branch_code": self.get_branch_code,
-            "get_ar_account": self.get_ar_account,
             "get_accurate_info": self.get_accurate_info,
-            "get_invoice_no": self.get_invoice_no,
             "get_date": self.get_date,
-            "get_description": self.get_description,
             "get_total": self.get_total,
         })
 
     def set_context(self, objects, data, ids, report_type=None):
         self.form = data["form"]
-        self.description = self.form["description"]
-        self.accurate_invoice_no = self.form["accurate_invoice_no"]
         self.warehouse_id = self.form["warehouse_id"][0]
         self.date = self.form["date"]
+        str_date =\
+            datetime.strptime(self.date, "%Y-%m-%d")
+        self.format_date =\
+            str_date.strftime("%d-%m-%Y")
         return super(Parser, self).set_context(objects, data, ids, report_type)
-
-    def get_invoice_no(self):
-        return self.accurate_invoice_no
 
     def get_date(self):
         return self.date
-
-    def get_description(self):
-        return self.description
 
     def get_total(self):
         return self.total
@@ -48,12 +42,6 @@ class Parser(report_sxw.rml_parse):
         user = obj_user.browse(self.cr, self.uid, [self.uid])[0]
 
         return user.company_id.accurate_branch_code
-
-    def get_ar_account(self):
-        obj_user = self.pool.get("res.users")
-        user = obj_user.browse(self.cr, self.uid, [self.uid])[0]
-
-        return user.company_id.accurate_pos_ar_account
 
     def get_accurate_info(self):
         res={}
@@ -67,16 +55,33 @@ class Parser(report_sxw.rml_parse):
                 obj_wh.browse(self.cr, self.uid, warehouse_id)
             if wh.accurate_dept_id:
                 res["accurate_dept_id"] = wh.accurate_dept_id
+                if wh.accurate_kode_warehouse:
+                    res["invoice_no"] = "%s%s-%s" % (
+                        wh.accurate_kode_warehouse,
+                        wh.accurate_dept_id,
+                        self.format_date
+                    )
+                else:
+                    res["invoice_no"] = ""
             else:
                 res["accurate_dept_id"] = ""
             if wh.accurate_warehouse_id:
                 res["accurate_warehouse_id"] = wh.accurate_warehouse_id
+                res["description"] = "OMSET %s %s" % (
+                    wh.accurate_warehouse_id,
+                    self.format_date
+                )
             else:
                 res["accurate_warehouse_id"] = ""
+                res["description"] = ""
             if wh.accurate_customer_id:
                 res["accurate_customer_id"] = wh.accurate_customer_id
             else:
                 res["accurate_customer_id"] = ""
+            if wh.accurate_ar_account:
+                res["accurate_ar_account"] = wh.accurate_ar_account
+            else:
+                res["accurate_ar_account"] = ""
         return res
 
     def _get_data(self):
@@ -88,7 +93,8 @@ class Parser(report_sxw.rml_parse):
 
         criteria = [
             ("warehouse_id", "=", self.warehouse_id),
-            ("date_order", "=", ascii_date_order)
+            ("date_order", "=", ascii_date_order),
+            ("total_qty", ">", 0)
         ]
 
         data_ids = obj_data.search(self.cr, self.uid, criteria)
