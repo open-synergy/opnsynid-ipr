@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Export PoS Order for Accurate",
-    "version": "8.0.1.2.2",
+    "version": "8.0.1.3.2",
     "category": "Point Of Sale",
     "website": "https://opensynergy-indonesia.com",
     "author": "OpenSynergy Indonesia",

@@ -85,7 +85,7 @@ class Parser(report_sxw.rml_parse):
     def _get_data(self):
         data = []
         obj_data = self.pool.get(
-            "pos.order_summary")
+            "pos.order_summary_by_product")
         ascii_date_order =\
             self.date.encode("ascii")
 
