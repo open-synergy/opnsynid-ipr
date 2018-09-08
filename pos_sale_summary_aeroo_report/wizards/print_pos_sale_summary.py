@@ -6,9 +6,9 @@ from datetime import datetime
 from openerp import api, models, fields
 
 
-class PrintHourlySale(models.TransientModel):
-    _name = "stock.print_hourly_sale"
-    _description = "Print PoS Hourly Sales"
+class PrintPosSaleSummary(models.TransientModel):
+    _name = "stock.print_pos_sale_summary"
+    _description = "Print PoS Sales Summary"
 
     company_id = fields.Many2one(
         string="Company",
@@ -23,10 +23,9 @@ class PrintHourlySale(models.TransientModel):
     config_ids = fields.Many2many(
         string="Point Of Sale",
         comodel_name="pos.config",
-        relation="pos_config_hourly_sale_rel",
+        relation="pos_config_sale_summary_rel",
         column1="wizard_id",
-        column2="config_id",
-        required=True
+        column2="config_id"
     )
 
     @api.multi
@@ -39,6 +38,6 @@ class PrintHourlySale(models.TransientModel):
 
         return {
             "type": "ir.actions.report.xml",
-            "report_name": "hourly_sale_pdf",
+            "report_name": "pos_sale_summary_pdf",
             "datas": datas,
         }

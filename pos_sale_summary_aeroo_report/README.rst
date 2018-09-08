@@ -2,11 +2,11 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============================
-PoS Hourly Sales Aeroo Report
-=============================
+=================
+PoS Sales Summary
+=================
 
-This module add PoS Hourly Sales report.
+This module add PoS Sales Summary report.
 
 Installation
 ============
@@ -17,7 +17,7 @@ To install this module, you need to:
 2.  Add the path to this repository in your configuration (addons-path)
 3.  Update the module list
 4.  Go to menu *Setting -> Modules -> Local Modules*
-5.  Search For *PoS Hourly Sales Aeroo Report*
+5.  Search For *PoS Sales Summary*
 6.  Install the module
 
 Usage

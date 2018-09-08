@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- © 2017 OpenSynergy Indonesia>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+    <data>
+        <record id="pos_pos_sale_summary_pdf_report" model="ir.actions.report.xml">
+            <field name="name">PoS Sales Summary PDF</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">pos.order</field>
+            <field name="report_name">pos_sale_summary_pdf</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">oo-odt</field>
+            <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
+            <field name="parser_loc">pos_sale_summary_aeroo_report/reports/pos_sale_summary.py</field>
+            <field name="report_rml">pos_sale_summary_aeroo_report/reports/pos_sale_summary.odt</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+        </record>
+    </data>
+</openerp>
+

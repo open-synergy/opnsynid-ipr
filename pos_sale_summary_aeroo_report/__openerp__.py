@@ -2,7 +2,7 @@
 # Copyright 2017 OpenSynergy Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    "name": "PoS Hourly Sales Aeroo Report",
+    "name": "PoS Sales Summary Aeroo Report",
     "version": "8.0.1.0.0",
     "category": "Point Of Sale",
     "website": "https://opensynergy-indonesia.com/",
@@ -11,10 +11,11 @@
     "installable": True,
     "depends": [
         "report_aeroo",
-        "pos_restaurant_table_management"
+        "point_of_sale"
     ],
     "data": [
-        "reports/pos_hourly_sale_reports.xml",
-        "wizards/print_pos_hourly_sale_views.xml",
+        "security/ir.model.access.csv",
+        "reports/pos_sale_summary_reports.xml",
+        "wizards/print_pos_sale_summary_views.xml",
     ],
 }
