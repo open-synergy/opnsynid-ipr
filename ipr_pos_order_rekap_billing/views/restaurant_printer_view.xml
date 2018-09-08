@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="restaurant_printer_view_form">
+            <field name="name">restaurant.printer Form Rekap Bill</field>
+            <field name="model">restaurant.printer</field>
+            <field name="inherit_id" ref="pos_restaurant.view_restaurant_printer_form"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='proxy_ip']" position="after">
+                        <field name="print_rekap_bill"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="restaurant_printer_view_tree">
+            <field name="name">restaurant.printer Tree Rekap Bill</field>
+            <field name="model">restaurant.printer</field>
+            <field name="inherit_id" ref="pos_restaurant.view_restaurant_printer"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='proxy_ip']" position="after">
+                        <field name="print_rekap_bill"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
+

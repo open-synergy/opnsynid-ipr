@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="RekapBillingButton">
+        <span class="control-button order-rekapbill">
+            <i class="fa fa-print"></i>
+            Rekap Bill
+        </span>
+    </t>
+
+    <t t-name="RekapBill">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <t t-if='receipt.shop.name'>
+                <div><t t-esc='receipt.shop.name' /></div>
+            </t>
+        </receipt>
+    </t>
+</templates>

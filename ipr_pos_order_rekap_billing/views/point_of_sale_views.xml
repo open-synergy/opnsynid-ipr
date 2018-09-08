@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="ipr_pos_order_rekap_billing assets" inherit_id="point_of_sale.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/ipr_pos_order_rekap_billing/static/src/js/pos_order_rekap_billing.js"></script>
+                <script type="text/javascript" src="/ipr_pos_order_rekap_billing/static/src/js/main.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
