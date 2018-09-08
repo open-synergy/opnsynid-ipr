@@ -1,0 +1,51 @@
+<receipt align='center' width='32' value-thousands-separator=','>
+    <div class="pos-center-align" bold="on">
+    	<div line-ratio='0.6'>
+    		<line>
+    			<left>${warehouse}</left>
+			</line>
+		</div>
+		<br/>
+        <div align="center">
+            REKAPITULASI BILLING
+        </div>
+        <div align="center">
+            Tanggal: ${date}
+        </div>
+        <br/>
+    	{% for o in objects %}\
+	        <div align="left">
+	            NO BILL   : ${o.pos_reference}
+	        </div>
+	        <div align="left">
+	            Payment by: 
+	        </div>
+	        <div line-ratio='0.6'>
+				{% for line in o.lines %}\
+	                <line indent='1'>
+	                    <left>
+	                    	<value value-decimals='3' value-autoint='on'>
+	                    		${line.qty}
+	                    	</value>
+							${line.product_id.name}
+                    	</left>
+	                    <right>
+	                    	<value>
+	                    		${line.price_subtotal_incl}
+	                    	</value>
+	                    </right>
+	                </line>
+				{% end %}\
+			</div>
+			<div>=================================</div>
+            <div line-ratio='0.6'>
+                <line>
+                	<left>SUBTOTAL</left>
+                    <right><value>${o.amount_total}</value></right>
+                </line>
+            </div>
+            <div>=================================</div>
+            <br/>
+        {% end %}\
+    </div>
+</receipt>

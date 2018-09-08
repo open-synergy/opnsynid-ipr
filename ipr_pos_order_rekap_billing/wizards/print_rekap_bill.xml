@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="print_ticket_bill_view_form" model="ir.ui.view">
+            <field name="name">Rekap Bill</field>
+            <field name="model">pos.order_print_rekap_bill</field>
+            <field name="arch" type="xml">
+                <form string="Print Rekap Bill">
+                    <group>
+                        <field name="date"/>
+                        <field name="warehouse_id"/>
+                    </group>
+                    <footer>
+                        <button name="print_rekap_bill"
+                            string="Print"
+                            type="object"
+                            />
+                        <button special="cancel"
+                            string="Close"
+                            />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="print_ticket_bill_action" model="ir.actions.act_window">
+            <field name="name">Rekap Bill</field>
+            <field name="res_model">pos.order_print_rekap_bill</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="print_ticket_bill_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="print_ticket_bill_menu"
+            name="Rekapitulasi Billing"
+            parent="point_of_sale.menu_point_of_sale"
+            action="print_ticket_bill_action"
+            sequence="99"
+        />
+
+    </data>
+</openerp>
