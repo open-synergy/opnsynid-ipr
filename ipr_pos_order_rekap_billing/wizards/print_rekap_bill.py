@@ -55,6 +55,7 @@ class PrintRekapBill(models.TransientModel):
             ("picking_type_id.warehouse_id", "=", self.warehouse_id.id),
             ("date_order", ">=", date_start_utc),
             ("date_order", "<=", date_stop_utc),
+            ("state", "in", ["paid", "done"])
         ]
 
         pos_order =\

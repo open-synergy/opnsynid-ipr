@@ -15,13 +15,16 @@
         "proxy_backend_ecspos_aeroo",
         "pos_restaurant",
         "pos_orders",
-        "ipr_pos_receipt"
+        "ipr_pos_receipt",
+        "pos_order_discount",
+        "pos_order_return"
     ],
     "data": [
         "reports/report_pos_order_rekap_billing.xml",
         "wizards/print_rekap_bill.xml",
         "views/point_of_sale_views.xml",
-        "views/restaurant_printer_view.xml"
+        "views/restaurant_printer_view.xml",
+        "views/pos_config_views.xml"
     ],
     "qweb": [
         "static/src/xml/ipr_pos_order_rekap_billing.xml",

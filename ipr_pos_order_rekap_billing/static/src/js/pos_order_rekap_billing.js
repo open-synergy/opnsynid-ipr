@@ -77,8 +77,8 @@ function print_rekap_billing(instance,module){
         build_widgets: function(){
             var self = this;
             this._super();
-
-            if(this.pos.printers.length){
+            var iface_rekap_billing = this.pos.config.iface_rekap_billing;
+            if(this.pos.printers.length && iface_rekap_billing){
                 var rekap_billing = $(QWeb.render('RekapBillingButton'));
 
                 rekap_billing.click(function(){

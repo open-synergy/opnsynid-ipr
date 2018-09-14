@@ -12,6 +12,49 @@ class Parser(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
         super(Parser, self).__init__(cr, uid, name, context)
         self.total = 0.00
+        self.total_v2 = 0.00
+        self.sub_total = 0.00
+        self.discount = 0.00
+        self.refund = 0.00
         self.localcontext.update({
             "time": time,
+            "compute_discount":self._compute_discount,
+            "get_discount":self._get_discount,
+            "compute_sub_total":self._compute_sub_total,
+            "get_sub_total":self._get_sub_total,
+            "compute_total":self._compute_total,
+            "get_total":self._get_total,
+            "compute_refund":self._compute_refund,
+            "get_refund":self._get_refund,
+            "get_net_sales":self._get_net_sales,
         })
+
+    def _compute_discount(self, discount):
+        self.discount +=  discount
+
+    def _get_discount(self):
+        return self.discount
+
+    def _compute_sub_total(self, price_subtotal):
+        self.sub_total +=  price_subtotal
+
+    def _get_sub_total(self):
+        result = self.sub_total
+        self.sub_total = 0.00
+        return result
+
+    def _compute_total(self, total):
+        self.total +=  total
+
+    def _get_total(self):
+        self.total_v2 = self.total - self.refund
+        return self.total_v2
+
+    def _compute_refund(self, refund):
+        self.refund +=  refund
+
+    def _get_refund(self):
+        return self.refund
+
+    def _get_net_sales(self):
+        return self.total_v2 - (self.discount + self.refund)

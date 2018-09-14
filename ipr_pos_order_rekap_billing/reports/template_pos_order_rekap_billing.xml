@@ -1,11 +1,11 @@
 <receipt align='center' width='32' value-thousands-separator=','>
     <div class="pos-center-align" bold="on">
-    	<div line-ratio='0.6'>
-    		<line>
-    			<left>${warehouse}</left>
-			</line>
-		</div>
-		<br/>
+        <div line-ratio='0.6'>
+            <line>
+                <left>${warehouse}</left>
+            </line>
+        </div>
+        <br/>
         <div align="center">
             REKAPITULASI BILLING
         </div>
@@ -13,39 +13,111 @@
             Tanggal: ${date}
         </div>
         <br/>
-    	{% for o in objects %}\
-	        <div align="left">
-	            NO BILL   : ${o.pos_reference}
-	        </div>
-	        <div align="left">
-	            Payment by: 
-	        </div>
-	        <div line-ratio='0.6'>
-				{% for line in o.lines %}\
-	                <line indent='1'>
-	                    <left>
-	                    	<value value-decimals='3' value-autoint='on'>
-	                    		${line.qty}
-	                    	</value>
-							${line.product_id.name}
-                    	</left>
-	                    <right>
-	                    	<value>
-	                    		${line.price_subtotal_incl}
-	                    	</value>
-	                    </right>
-	                </line>
-				{% end %}\
-			</div>
-			<div>=================================</div>
+        {% for o in objects %}
+            <div align="left">
+                NO BILL   : ${o.pos_reference}
+            </div>
+            {% if (o.is_return_order) %}
+            <div align="left">
+                STATUS: REFUND ORDER
+            </div>
+            {% end if %}
+            <div line-ratio='0.6'>
+                {% for line in o.lines %}
+                    {% if (o.session_id and o.session_id.config_id and o.session_id.config_id.wk_discount_product_id) %}
+                        {% if (line.product_id.id != o.session_id.config_id.wk_discount_product_id.id) %}
+                            <line indent='1'>
+                                <left>
+                                    <value value-decimals='3' value-autoint='on'>
+                                        ${abs(line.qty)}
+                                    </value>
+                                    ${line.product_id.name}
+                                </left>
+                                <right>
+                                    <value>
+                                        ${abs(line.price_subtotal)}
+                                    </value>
+                                </right>
+                            </line>
+                            {% if (line.discount > 0) %}
+                                <line indent='2'>
+                                    <left>
+                                        Discount ${line.discount}%
+                                    </left>
+                                </line>
+                                ${compute_discount(line.price_unit * ((line.discount or 0.0) / 100.0))}
+                            {% end if %}
+                            ${compute_sub_total(abs(line.price_subtotal))}
+                            ${compute_total(abs(line.qty * line.price_unit))}
+                        {% end if %}
+                        {% if (line.product_id.id == o.session_id.config_id.wk_discount_product_id.id) %}
+                            ${compute_discount(abs(line.price_subtotal))}
+                        {% end if %}
+                    {% end if %}
+                {% end %}
+            </div>
+            <div>=================================</div>
             <div line-ratio='0.6'>
                 <line>
-                	<left>SUBTOTAL</left>
-                    <right><value>${o.amount_total}</value></right>
+                    <left>SUBTOTAL</left>
+                    <right><value>${get_sub_total()}</value></right>
                 </line>
             </div>
             <div>=================================</div>
             <br/>
-        {% end %}\
+            ${compute_refund(abs(o.amount_return))}
+        {% end %}
+        <br/>
+        <div line-ratio='0.6'>
+            <line>
+                <left>TOTAL</left>
+                <right><value>${get_total()}</value></right>
+            </line>
+            <line>
+                <left>DISCOUNT</left>
+                <right><value>${get_discount()}</value></right>
+            </line>
+            <line>
+                <left>REFUND</left>
+                <right><value>${get_refund()}</value></right>
+            </line>
+        </div>
+        <div>=================================</div>
+        <div line-ratio='0.6'>
+            <line>
+                <left>NET SALES</left>
+                <right><value>${get_net_sales()}</value></right>
+            </line>
+            <line>
+                <left>TAX</left>
+                <right><value>${sum_field(objects, "amount_tax")}</value></right>
+            </line>
+            <line>
+                <right>==============</right>
+            </line>
+            <line>
+                <left>TOTAL REVENUE</left>
+                <right><value>${sum_field(objects, "amount_total")}</value></right>
+            </line>
+        </div>
+        <br/>
+        <div line-ratio='0.6'>
+            <line>
+                <left>TUNAI</left>
+                <right></right>
+            </line>
+            <line>
+                <left>HUTANG</left>
+                <right></right>
+            </line>
+            <line>
+                <left>KARTU KREDIT</left>
+                <right></right>
+            </line>
+            <line>
+                <left>VOUCHER</left>
+                <right></right>
+            </line>
+        </div>
     </div>
 </receipt>
