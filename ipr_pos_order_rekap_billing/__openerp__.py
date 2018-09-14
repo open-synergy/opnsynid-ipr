@@ -13,15 +13,17 @@
     "depends": [
         "report_aeroo",
         "proxy_backend_ecspos_aeroo",
-        # "pos_restaurant",
+        "pos_restaurant",
+        "pos_orders",
+        "ipr_pos_receipt"
     ],
     "data": [
         "reports/report_pos_order_rekap_billing.xml",
         "wizards/print_rekap_bill.xml",
-        # "views/point_of_sale_views.xml",
-        # "views/restaurant_printer_view.xml"
+        "views/point_of_sale_views.xml",
+        "views/restaurant_printer_view.xml"
     ],
     "qweb": [
-        # "static/src/xml/ipr_pos_order_rekap_billing.xml",
+        "static/src/xml/ipr_pos_order_rekap_billing.xml",
     ],
 }
