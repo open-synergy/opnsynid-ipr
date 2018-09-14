@@ -24,35 +24,33 @@
             {% end if %}
             <div line-ratio='0.6'>
                 {% for line in o.lines %}
-                    {% if (o.session_id and o.session_id.config_id and o.session_id.config_id.wk_discount_product_id) %}
-                        {% if (line.product_id.id != o.session_id.config_id.wk_discount_product_id.id) %}
-                            <line indent='1'>
+                    {% if (line.product_id.id != o.session_id.config_id.wk_discount_product_id.id) %}
+                        <line indent='1'>
+                            <left>
+                                <value value-decimals='3' value-autoint='on'>
+                                    ${abs(line.qty)}
+                                </value>
+                                ${line.product_id.name}
+                            </left>
+                            <right>
+                                <value>
+                                    ${abs(line.price_subtotal)}
+                                </value>
+                            </right>
+                        </line>
+                        {% if (line.discount > 0) %}
+                            <line indent='2'>
                                 <left>
-                                    <value value-decimals='3' value-autoint='on'>
-                                        ${abs(line.qty)}
-                                    </value>
-                                    ${line.product_id.name}
+                                    Discount ${line.discount}%
                                 </left>
-                                <right>
-                                    <value>
-                                        ${abs(line.price_subtotal)}
-                                    </value>
-                                </right>
                             </line>
-                            {% if (line.discount > 0) %}
-                                <line indent='2'>
-                                    <left>
-                                        Discount ${line.discount}%
-                                    </left>
-                                </line>
-                                ${compute_discount(line.price_unit * ((line.discount or 0.0) / 100.0))}
-                            {% end if %}
-                            ${compute_sub_total(abs(line.price_subtotal))}
-                            ${compute_total(abs(line.qty * line.price_unit))}
+                            ${compute_discount(line.price_unit * ((line.discount or 0.0) / 100.0))}
                         {% end if %}
-                        {% if (line.product_id.id == o.session_id.config_id.wk_discount_product_id.id) %}
-                            ${compute_discount(abs(line.price_subtotal))}
-                        {% end if %}
+                        ${compute_sub_total(abs(line.price_subtotal))}
+                        ${compute_total(abs(line.qty * line.price_unit))}
+                    {% end if %}
+                    {% if (line.product_id.id == o.session_id.config_id.wk_discount_product_id.id) %}
+                        ${compute_discount(abs(line.price_subtotal))}
                     {% end if %}
                 {% end %}
             </div>
