@@ -18,6 +18,7 @@
                 NO BILL   : ${o.pos_reference}
             </div>
             {% if (o.is_return_order) %}
+            ${compute_refund(abs(o.amount_total))}
             <div align="left">
                 STATUS: REFUND ORDER
             </div>
@@ -52,7 +53,7 @@
                     {% if (line.product_id.id == o.session_id.config_id.wk_discount_product_id.id) %}
                         ${compute_discount(abs(line.price_subtotal))}
                     {% end if %}
-                {% end %}
+                {% end for%}
             </div>
             <div>=================================</div>
             <div line-ratio='0.6'>
@@ -63,8 +64,7 @@
             </div>
             <div>=================================</div>
             <br/>
-            ${compute_refund(abs(o.amount_return))}
-        {% end %}
+        {% end for%}
         <br/>
         <div line-ratio='0.6'>
             <line>
