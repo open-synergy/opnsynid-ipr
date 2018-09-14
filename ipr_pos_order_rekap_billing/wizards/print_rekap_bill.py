@@ -2,7 +2,8 @@
 # © 2016 OpenSynergy Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models, fields
+from openerp import api, models, fields, _
+from openerp.exceptions import Warning as UserError
 import pytz
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -13,7 +14,8 @@ class PrintRekapBill(models.TransientModel):
 
     date = fields.Date(
         string="Date",
-        required=True
+        required=True,
+        default=datetime.now().strftime("%Y-%m-%d"),
     )
     warehouse_id = fields.Many2one(
         string="Warehouse",

@@ -8,10 +8,56 @@
     </t>
 
     <t t-name="RekapBill">
-        <receipt align='center' width='40' value-thousands-separator='' >
-            <t t-if='receipt.shop.name'>
-                <div><t t-esc='receipt.shop.name' /></div>
-            </t>
+        <receipt align='center' width='32' value-thousands-separator=','>
+            <div class="pos-center-align" bold="on">
+                <div line-ratio='0.6'>
+                    <line>
+                        <left><t t-esc="details.warehouse" /></left>
+                    </line>
+                </div>
+                <br/>
+                <div align="center">
+                    REKAPITULASI BILLING
+                </div>
+                <div align="center">
+                    Tanggal: <t t-esc="details.tanggal" />
+                </div>
+                <br/>
+                <t t-foreach="details.data" t-as="data">
+                    <div align="left">
+                        NO BILL:<t t-esc="data.pos_reference" />
+                    </div>
+                    <div align="left">
+                        Payment by: 
+                    </div>
+                    <div line-ratio='0.6'>
+                        <t t-foreach="data.lines" t-as="line">
+                            <line indent='1'>
+                                <left>
+                                    <value value-decimals='3' value-autoint='on'>
+                                        <t t-esc="line.qty" />
+                                    </value>
+                                    <t t-esc="line.product_name" />
+                                </left>
+                                <right>
+                                    <value>
+                                        <t t-esc="line.price_subtotal_incl" />
+                                    </value>
+                                </right>
+                            </line>
+                        </t>
+                    </div>
+                    <div>=================================</div>
+                    <div line-ratio='0.6'>
+                        <line>
+                            <left>SUBTOTAL</left>
+                            <right><value><t t-esc="data.amount_total" /></value></right>
+                        </line>
+                    </div>
+                    <div>=================================</div>
+                    <br/>
+                </t>
+            </div>
         </receipt>
     </t>
 </templates>
