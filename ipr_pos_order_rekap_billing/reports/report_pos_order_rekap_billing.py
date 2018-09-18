@@ -5,6 +5,7 @@
 import time
 from openerp.report import report_sxw
 from datetime import datetime
+import pytz
 
 
 class Parser(report_sxw.rml_parse):
@@ -27,7 +28,24 @@ class Parser(report_sxw.rml_parse):
             "compute_refund":self._compute_refund,
             "get_refund":self._get_refund,
             "get_net_sales":self._get_net_sales,
+            "convert_datetime_utc":self._convert_datetime_utc,
         })
+
+    def _convert_datetime_utc(self, dt):
+        if dt:
+            obj_user = self.pool.get('res.users')
+            user = obj_user.browse(self.cr, self.uid, [self.uid])[0]
+            convert_dt = datetime.strptime(dt, "%Y-%m-%d %H:%M:%S")
+            if user.tz:
+                tz = pytz.timezone(user.tz)
+            else:
+                tz = pytz.utc
+            convert_utc = pytz.utc.localize(convert_dt).astimezone(tz)
+            format_utc = convert_utc.strftime("%H:%M:%S")
+
+            return format_utc
+        else:
+            return "-"
 
     def _compute_discount(self, discount):
         self.discount +=  discount

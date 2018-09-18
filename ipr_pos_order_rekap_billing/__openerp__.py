@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Inti Prima Rasa - Pos Order Rekapitulasi Billing",
-    "version": "8.0.1.1.2",
+    "version": "8.0.1.2.3",
     "category": "Point Of Sale",
     "author": "OpenSynergy Indonesia",
     "website": "https://opensynergy-indonesia.com",

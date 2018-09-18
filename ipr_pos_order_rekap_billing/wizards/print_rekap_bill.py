@@ -68,7 +68,12 @@ class PrintRekapBill(models.TransientModel):
                 str_date.strftime("%d-%b-%Y")
             res_params = {
                 "warehouse": self.warehouse_id.name,
-                "date": format_date
+                "date": format_date,
+                "address": self.warehouse_id.partner_id.contact_address,
+                "phone": self.warehouse_id.partner_id.phone,
+                "vat": self.warehouse_id.partner_id.vat,
+                "email": self.warehouse_id.partner_id.email,
+                "website": self.warehouse_id.partner_id.website
             }
             action = self.env.ref(
                 "proxy_backend_ecspos_aeroo."

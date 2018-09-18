@@ -1,10 +1,33 @@
 <receipt align='center' width='32' value-thousands-separator=','>
     <div class="pos-center-align" bold="on">
-        <div line-ratio='0.6'>
-            <line>
-                <left>${warehouse}</left>
-            </line>
+        <div align="left">
+            ${warehouse}
         </div>
+        {% if (address) %}
+            <div align="left">
+                ${address}
+            </div>
+        {% end if %}
+        {% if (phone) %}
+            <div align="left">
+                Phone: ${phone}
+            </div>
+        {% end if %}
+        {% if (vat) %}
+            <div align="left">
+                VAT: ${phone}
+            </div>
+        {% end if %}
+        {% if (email) %}
+            <div align="left">
+                ${email}
+            </div>
+        {% end if %}
+        {% if (website) %}
+            <div align="left">
+                ${website}
+            </div>
+        {% end if %}
         <br/>
         <div align="center">
             REKAPITULASI BILLING
@@ -16,6 +39,9 @@
         {% for o in objects %}
             <div align="left">
                 NO BILL   : ${o.pos_reference}
+            </div>
+            <div align="left">
+                ORDER TIME: ${convert_datetime_utc(o.date_order)}
             </div>
             {% if (o.is_return_order) %}
             ${compute_refund(abs(o.amount_total))}
