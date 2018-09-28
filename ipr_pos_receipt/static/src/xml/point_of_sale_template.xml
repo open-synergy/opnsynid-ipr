@@ -8,24 +8,15 @@
         <t t-jquery="[t-if='!receipt.company.logo']" t-operation='replace'>
         </t>
         <t t-jquery="[t-if='receipt.shop.name']" t-operation='replace'>
-            <t t-if='receipt.shop.name'>
-                <div><t t-esc='receipt.shop.name' /></div>
-            </t>
-            <t t-if='receipt.shop_address.contact_address'>
-                <div><t t-esc='receipt.shop_address.contact_address' /></div>
-            </t>
-            <t t-if='receipt.shop_address.phone'>
-                <div>Tel:<t t-esc='receipt.shop_address.phone' /></div>
-            </t>
-            <t t-if='receipt.shop_address.vat'>
-                <div>VAT:<t t-esc='receipt.shop_address.vat' /></div>
-            </t>
-            <t t-if='receipt.shop_address.email'>
-                <div><t t-esc='receipt.shop_address.email' /></div>
-            </t>
-            <t t-if='receipt.shop_address.website'>
-                <div><t t-esc='receipt.shop_address.website' /></div>
-            </t>
+            <div line-ratio='0.6'>
+                <line size='double-height'>
+                    <left><t t-esc='receipt.config_name'/></left>
+                    <right><t t-esc='receipt.date.date'/>-<t t-esc='receipt.date.month_name'/>-<t t-esc='receipt.date.year'/> </right>
+                </line>
+                <line size='double-height'>
+                    <right align="right"><t t-esc='receipt.date.hour'/>:<t t-esc='receipt.date.minute'/>:<t t-esc='receipt.date.seconds'/></right>
+                </line>
+            </div>
             <br />
         </t>
         <t t-jquery="[t-if='receipt.company.contact_address']" t-operation='replace'>
@@ -42,24 +33,12 @@
                     <h2>** DINE IN **</h2>
                 </div>
                 <br />
-                <div line-ratio='0.6'>
-                    <line>
-                        <left align="left">TABLE: <t t-esc="receipt.table.table_name" /></left>
-                    </line>
-                </div>
             </t>
             <t t-if='!receipt.table'>
                 <div class="pos-center-align">
                     <h2>** TAKE AWAY **</h2>
                 </div>
                 <br />
-            </t>
-            <t t-if='receipt.client'>
-                <div line-ratio='0.6'>
-                    <line>
-                        <left align="left">CUSTOMER : <t t-esc="receipt.client" /></left>
-                    </line>
-                </div>
             </t>
         </t>
         <t t-jquery="[t-if='receipt.cashier']" t-operation='replace'>
@@ -152,9 +131,6 @@
                     <h2><t t-esc='receipt.footer'/></h2>
                 </div>
             </t>
-            <br />
-            <t t-esc='receipt.date.date'/>-<t t-esc='receipt.date.month_name'/>-<t t-esc='receipt.date.year'/>
-            <t t-esc='receipt.date.hour'/>:<t t-esc='receipt.date.minute'/>:<t t-esc='receipt.date.seconds'/>
             <br />
             <div class="pos-center-align">
                 <h2>** TERIMA KASIH **</h2>
