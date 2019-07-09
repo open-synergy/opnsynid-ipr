@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="pos_order_reprint_report" model="ir.actions.report.xml">
+            <field name="name">Re-Print Receipt</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">pos.order</field>
+            <field name="report_name">aeroo_reportReprintReceipt</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">genshi-raw</field>
+            <field name="out_format" ref="report_aeroo.report_mimetypes_raw"/>
+            <field name="report_rml">ipr_pos_receipt/reports/template_pos_order_reprint.xml</field>
+            <field name="parser_loc">ipr_pos_receipt/reports/report_pos_order_reprint.py</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+        </record>   
+    </data>
+</openerp>
+
