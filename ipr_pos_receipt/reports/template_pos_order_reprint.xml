@@ -1,0 +1,130 @@
+<receipt align='center' width='40' value-thousands-separator=','>
+    <div class="pos-center-align" >
+        <div font='b' line-ratio='0.6'>
+            <line size='double-height'>
+                <left>${o.session_id.config_id.name}</left>
+                <right>${format_date}</right>
+            </line>
+            <line size='double-height'>
+                <right>${format_time}</right>
+            </line>
+        </div>
+        <br />
+        <div font='b' class="pos-center-align">
+            {% if o.table_id %}
+            <h2>** DINE IN **</h2>
+            {% end if %}
+            {% if not o.table_id %}
+            <h2>** TAKE AWAY **</h2>
+            {% end if %}
+        </div>
+        <br />
+        <div font='b' line-ratio='0.6'>
+            <line>
+                <left align="left">CASHIER : ${o.user_id.name}</left>
+                <right align="right">Cover : 1</right>
+            </line>
+            <div>========================================</div>
+        </div>
+        <br />
+        <br />
+        <!-- Orderlines -->
+
+        <div line-ratio='0.6'>
+            {% for line in o.lines %}
+                {% if (line.discount == 0.0 and line.product_id.uom_id.name == "Unit(s)" and line.qty == 1.0) %}
+                    <line>
+                        <left>${line.product_id.name}</left>
+                        <right><value>${line.price_unit}</value></right>
+                    </line>
+                {% end if %}
+                {% if not (line.discount == 0.0 and line.product_id.uom_id.name == "Unit(s)" and line.qty == 1.0) %}
+                    <line>
+                        <left>${line.product_id.name}</left>
+                    </line>
+                    {% if (line.discount != 0.0) %}
+                    <line indent='1'>
+                        <left>Discount: ${line.discount}%</left>
+                    </line>
+                    {% end if %}
+                    <line indent='1'>
+                        <left>
+                            <value value-decimals='3' value-autoint='on'>
+                                ${line.qty}
+                            </value>
+                            {% if (line.product_id.uom_id.name != "Unit(s)") %}
+                                ${line.product_id.uom_id.name}
+                            {% end if %}
+                            x 
+                            <value value-decimals='2'>
+                                ${line.price_unit}
+                            </value>
+                        </left>
+                        <right>
+                            <value>${compute_price(line.price_unit, line.qty, line.discount)}</value>
+                        </right>
+                    </line>
+                {% end if %}
+            {% end for%}
+
+            {% if o.amount_tax %}
+            <line><right>--------</right></line>
+            <line><right> <value>${get_subtotal()}</value></right></line>
+            {% for tax in get_taxes(o.lines) %}
+                <line>
+                    <left>${tax['name']}</left>
+                    <right><value>${tax['total']}</value></right>
+                </line>
+            {% end for%}
+
+            <!-- Total -->
+
+            <line><right>--------</right></line>
+            <line size='double-height'>
+                <left><pre>        TOTAL</pre></left>
+                <right><value>${o.amount_total}</value></right>
+            </line>
+            <br/><br/>
+
+            <line>
+                <right>--------</right>
+            </line>
+            ${compute_payment_lines(o.statement_ids)}
+            <line size='double-height'>
+                <left><pre>        PAID</pre></left>
+                <right><value>${get_paid()}</value></right>
+            </line>
+            <br/>
+
+            <!-- Payment Lines -->
+            {% for payment_line in get_payment_lines() %}
+                <line indent='1'>
+                    <left>${payment_line['name']}</left>
+                    <right><value>${payment_line['total']}</value></right>
+                </line>
+            {% end for%}
+
+            <line size='double-height'>
+                <left><pre>        CHANGE</pre></left>
+                <right><value>${get_change()}</value></right>
+            </line>
+            <br/>
+
+            {% if o.session_id.config_id.receipt_footer %}
+                <br/>
+                <br/>
+                <div class="pos-center-align">
+                    <h2>${o.config_id.receipt_footer}</h2>
+                </div>
+            {% end if %}
+            <br />
+            <div font='b'>
+                <div>${o.pos_reference}</div>
+            </div>
+            <div class="pos-center-align">
+                <h2>** TERIMA KASIH **</h2>
+            </div>
+
+        </div>
+    </div>
+</receipt>

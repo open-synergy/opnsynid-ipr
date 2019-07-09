@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Inti Prima Rasa - Pos Receipt",
-    "version": "8.0.1.0.0",
+    "version": "8.0.2.0.0",
     "category": "Point Of Sale",
     "author": "OpenSynergy Indonesia",
     "website": "https://opensynergy-indonesia.com",
@@ -15,10 +15,14 @@
         "pos_restaurant_table_management",
         "pos_card_payment_info",
         "pos_payment_method_display",
-        "pos_order_discount"
+        "pos_order_discount",
+        "proxy_backend_ecspos_aeroo",
     ],
     "data": [
-        "views/point_of_sale_views.xml"
+        "security/res_groups.xml",
+        "reports/report_pos_order_reprint.xml",
+        "views/point_of_sale_views.xml",
+        "views/pos_order_views.xml"
     ],
     "qweb": [
         "static/src/xml/point_of_sale_template.xml",
