@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="stock_print_list_common_view_form" model="ir.ui.view">
+    <field name="name">stock.print.list.common.form</field>
+    <field name="model">stock.print_list_common</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="group_1" colspan="4" col="2">
+                <field name="company_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <separator string="Warehouse(s)" colspan="2"/>
+                <field name="warehouse_ids"/>
+                <field name="output_format"/>
+            </group>
+            <footer>
+                <button name="action_print"
+                        type="object"
+                        string="Print"
+                        class="oe_highlight"/>
+                or
+                <button special="cancel"
+                        string="Cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+</data>
+</openerp>
