@@ -8,26 +8,10 @@
 <record id="print_stock_transfer_list_view_form" model="ir.ui.view">
     <field name="name">stock.print.transfer.list.form</field>
     <field name="model">stock.print_transfer_list</field>
+    <field name="inherit_id" ref="ipr_stock_list_common.stock_print_list_common_view_form"/>
     <field name="arch" type="xml">
-        <form string="Print Stock Transfer List">
-            <group name="group_1" colspan="4" col="2">
-                <field name="company_id"/>
-                <field name="date_start"/>
-                <field name="date_end"/>
-                <separator string="Warehouse(s)" colspan="2"/>
-                <field name="warehouse_ids" nolabel="1" colspan="2"/>
-                <field name="output_format"/>
-            </group>
-            <footer>
-                <button name="action_print"
-                        type="object"
-                        string="Print"
-                        class="oe_highlight"/>
-                or
-                <button special="cancel"
-                        string="Cancel"/>
-            </footer>
-        </form>
+        <data>
+        </data>
     </field>
 </record>
 
@@ -36,6 +20,7 @@
     <field name="res_model">stock.print_transfer_list</field>
     <field name="view_type">form</field>
     <field name="view_mode">form</field>
+    <field name="view_id" ref="print_stock_transfer_list_view_form"/>
     <field name="target">new</field>
 </record>
 
