@@ -12,6 +12,10 @@
 # sale-workflow https://github.com/OCA/sale-workflow
 #
 # To provide both the URL and a branch, use:
-aeroo_reports https://github.com/aeroo/aeroo_reports 8.0
-opnsynid_account_financial_tools https://github.com/open-synergy/opnsynid-account-financial-tools 8.0-supplier_invoice_export_accurate
-opnsynid_pos https://github.com/open-synergy/opnsynid-pos 8.0
+hr https://github.com/OCA/hr 8.0
+server-tools https://github.com/open-synergy/server-tools.git 8.0-dev
+opnsynid-server-tools https://github.com/open-synergy/opnsynid-server-tools.git 8.0
+opnsynid-partner-contact https://github.com/open-synergy/opnsynid-partner-contact.git 8.0
+opnsynid-loan-saving https://github.com/open-synergy/opnsynid-loan-saving.git 8.0
+opnsynid-hardware https://github.com/open-synergy/opnsynid-hardware.git 8.0
+opnsynid-stock-logistics-warehouse https://github.com/open-synergy/opnsynid-stock-logistics-warehouse.git 8.0
