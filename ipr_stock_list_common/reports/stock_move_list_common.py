@@ -85,7 +85,7 @@ class StockMoveListCommon(models.AbstractModel):
                 A.product_qty AS product_qty,
                 A.location_id AS source_loc_id,
                 A.location_dest_id AS dest_loc_id,
-                A.product_uom AS product_uom_id,
+                e.uom_id AS product_uom_id,
                 B.picking_type_id AS picking_type_id
         """
         return select_field_str
@@ -100,6 +100,8 @@ class StockMoveListCommon(models.AbstractModel):
         join_str = """
             JOIN stock_picking AS B ON A.picking_id=B.id
             JOIN stock_picking_type AS C ON B.picking_type_id=C.id
+            JOIN product_product AS d ON A.product_id = d.id
+            JOIN product_template AS e ON d.product_tmpl_id = e.id
         """
         return join_str
 
