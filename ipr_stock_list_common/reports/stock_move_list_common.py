@@ -100,8 +100,8 @@ class StockMoveListCommon(models.AbstractModel):
         join_str = """
             JOIN stock_picking AS B ON A.picking_id=B.id
             JOIN stock_picking_type AS C ON B.picking_type_id=C.id
-            JOIN product_product AS d ON A.product_id = d.id
-            JOIN product_template AS e ON d.product_tmpl_id = e.id
+            JOIN product_product AS x ON A.product_id = x.id
+            JOIN product_template AS y ON x.product_tmpl_id = y.id
         """
         return join_str
 
