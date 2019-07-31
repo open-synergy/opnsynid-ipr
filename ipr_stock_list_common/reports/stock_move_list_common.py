@@ -85,7 +85,7 @@ class StockMoveListCommon(models.AbstractModel):
                 A.product_qty AS product_qty,
                 A.location_id AS source_loc_id,
                 A.location_dest_id AS dest_loc_id,
-                e.uom_id AS product_uom_id,
+                y.uom_id AS product_uom_id,
                 B.picking_type_id AS picking_type_id
         """
         return select_field_str
