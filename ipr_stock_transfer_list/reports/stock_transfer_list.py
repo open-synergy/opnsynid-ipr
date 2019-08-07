@@ -105,6 +105,7 @@ class Parser(report_sxw.rml_parse):
                 res = {
                     "no": no,
                     "internal_ref": internal_ref,
+                    "product_code": data_id.product_code,
                     "product_name": product_name,
                     "qty": data_id.product_qty,
                     "uom": uom_name,
