@@ -85,10 +85,10 @@ class Parser(report_sxw.rml_parse):
                 uom_id = data_id.product_uom_id
                 uom_name = uom_id and uom_id.name or "-"
 
-                wh_loc_id = data_id.wh_loc_id
-                wh_loc_id_name = (
-                    wh_loc_id and
-                    wh_loc_id.name or
+                warehouse = data_id.warehouse_id
+                warehouse_name = (
+                    warehouse and
+                    warehouse.name or
                     "-"
                 )
 
@@ -98,10 +98,11 @@ class Parser(report_sxw.rml_parse):
                 res = {
                     "no": no,
                     "internal_ref": internal_ref,
+                    "product_code": data_id.product_code,
                     "product_name": product_name,
                     "qty": data_id.product_qty,
                     "uom": uom_name,
-                    "warehouse": wh_loc_id_name,
+                    "warehouse": warehouse_name,
                     "date": conv_date,
                     "vendor": data_id.partner_id.name
                 }
