@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+<record id="print_stock_transfer_in_list_view_form" model="ir.ui.view">
+    <field name="name">stock.print.transfer.in.list.form</field>
+    <field name="model">stock.print_transfer_in_list</field>
+    <field name="inherit_id" ref="ipr_stock_list_common.stock_print_list_common_view_form"/>
+    <field name="arch" type="xml">
+        <data>
+        </data>
+    </field>
+</record>
+
+<record id="print_stock_transfer_in_list_action" model="ir.actions.act_window">
+    <field name="name">Print Transfer In List</field>
+    <field name="res_model">stock.print_transfer_in_list</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="print_stock_transfer_in_list_view_form"/>
+    <field name="target">new</field>
+</record>
+
+<menuitem
+    id="print_stock_transfer_in_list_menu"
+    name="Transfer In List"
+    parent="stock.next_id_61"
+    action="print_stock_transfer_in_list_action"
+    sequence="1000"
+/>
+
+</data>
+</openerp>
