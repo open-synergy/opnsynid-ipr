@@ -10,23 +10,6 @@ class StockMoveReceiveList(models.Model):
     _inherit = "stock.move_list_common"
     _auto = False
 
-    wh_loc_id = fields.Many2one(
-        string="Warehouse",
-        comodel_name="stock.warehouse"
-    )
-
-    def _select_field(self):
-        _super = super(StockMoveReceiveList, self)
-        new_query = """
-            C.warehouse_id AS wh_loc_id
-        """
-        select_field_str = (
-            _super._select_field() +
-            "," +
-            new_query
-        )
-        return select_field_str
-
     def _get_subtype(self, cr):
         query = """
             SELECT  res_id
