@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="stock_transfer_in_list_ods_report" model="ir.actions.report.xml">
+            <field name="name">Stock Transfer In List ODS</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">stock.print_transfer_in_list</field>
+            <field name="report_name">stock_transfer_in_list_ods</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">oo-ods</field>
+            <field name="out_format" ref="report_aeroo.report_mimetypes_ods_ods"/>
+            <field name="parser_loc">ipr_stock_transfer_in_list/reports/stock_transfer_in_list.py</field>
+            <field name="report_rml">ipr_stock_transfer_in_list/reports/stock_transfer_in_list.ods</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+        </record>
+        <record id="stock_transfer_in_list_xls_report" model="ir.actions.report.xml">
+            <field name="name">Stock Transfer In List XLS</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">stock.print_transfer_in_list</field>
+            <field name="report_name">stock_transfer_in_list_xls</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">oo-ods</field>
+            <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
+            <field name="parser_loc">ipr_stock_transfer_in_list/reports/stock_transfer_in_list.py</field>
+            <field name="report_rml">ipr_stock_transfer_in_list/reports/stock_transfer_in_list.ods</field>
+            <field name="parser_state">loc</field>
+            <field name="tml_source">file</field>
+        </record>
+    </data>
+</openerp>
