@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_stock_move_compliment_list_all_user,stock.move_compliment_list – All User,model_stock_move_compliment_list,,1,0,0,0
