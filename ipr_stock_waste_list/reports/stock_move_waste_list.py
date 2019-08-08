@@ -5,8 +5,8 @@
 from openerp import models, fields, api
 
 
-class StockMoveReceiveList(models.Model):
-    _name = "stock.move_receive_list"
+class StockMoveWasteList(models.Model):
+    _name = "stock.move_waste_list"
     _inherit = "stock.move_list_common"
     _auto = False
 
@@ -14,8 +14,8 @@ class StockMoveReceiveList(models.Model):
         query = """
             SELECT  res_id
             FROM    ir_model_data
-            WHERE   module = 'stock_operation_subtype'
-            AND     name = 'good_receipt_subtype'
+            WHERE   module = 'stock_waste_operation'
+            AND     name = 'waste_subtype'
         """
         cr.execute(query)
         subtype_id = cr.fetchone()[0]

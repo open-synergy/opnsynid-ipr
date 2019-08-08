@@ -2,8 +2,8 @@
 # Copyright 2019 OpenSynergy Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    "name": "Stock Receive List Aeroo Report",
-    "version": "8.0.1.1.0",
+    "name": "Stock Waste List Aeroo Report",
+    "version": "8.0.1.0.0",
     "category": "Stock",
     "website": "https://opensynergy-indonesia.com/",
     "author": "OpenSynergy Indonesia",
@@ -12,12 +12,12 @@
     "depends": [
         "report_aeroo",
         "ipr_stock_list_common",
-        "stock_operation_subtype"
+        "stock_waste_operation"
     ],
     "data": [
         "security/ir.model.access.csv",
-        "reports/stock_receive_list.xml",
-        "reports/stock_move_receive_list.xml",
-        "wizards/print_stock_receive_list_views.xml",
+        "reports/stock_waste_list.xml",
+        "reports/stock_move_waste_list.xml",
+        "wizards/print_stock_waste_list_views.xml",
     ],
 }

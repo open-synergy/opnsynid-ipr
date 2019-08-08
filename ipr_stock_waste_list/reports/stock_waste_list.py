@@ -59,7 +59,7 @@ class Parser(report_sxw.rml_parse):
     def _get_data(self):
         data = []
         obj_data = self.pool.get(
-            "stock.move_transfer_list")
+            "stock.move_waste_list")
         no = 1
 
         criteria = [
@@ -85,17 +85,10 @@ class Parser(report_sxw.rml_parse):
                 uom_id = data_id.product_uom_id
                 uom_name = uom_id and uom_id.name or "-"
 
-                source_loc_wh_id = data_id.source_loc_wh_id
-                source_loc_wh_name = (
-                    source_loc_wh_id and
-                    source_loc_wh_id.name or
-                    "-"
-                )
-
-                source_dest_loc_wh_id = data_id.source_dest_loc_wh_id
-                source_dest_loc_wh_name = (
-                    source_dest_loc_wh_id and
-                    source_dest_loc_wh_id.name or
+                warehouse = data_id.warehouse_id
+                warehouse_name = (
+                    warehouse and
+                    warehouse.name or
                     "-"
                 )
 
@@ -109,9 +102,7 @@ class Parser(report_sxw.rml_parse):
                     "product_name": product_name,
                     "qty": data_id.product_qty,
                     "uom": uom_name,
-                    "src_loc": source_loc_wh_name,
-                    "dest_loc": source_dest_loc_wh_name,
-                    "date": conv_date,
+                    "date": conv_date
                 }
                 data.append(res)
                 no += 1

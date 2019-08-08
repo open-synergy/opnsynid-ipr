@@ -59,7 +59,7 @@ class Parser(report_sxw.rml_parse):
     def _get_data(self):
         data = []
         obj_data = self.pool.get(
-            "stock.move_transfer_list")
+            "stock.move_transfer_in_list")
         no = 1
 
         criteria = [
