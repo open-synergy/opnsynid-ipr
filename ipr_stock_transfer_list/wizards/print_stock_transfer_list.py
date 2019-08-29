@@ -43,10 +43,12 @@ class PrintStockTransferList(models.TransientModel):
         waction = self.env.ref(
             "ipr_stock_transfer_list."
             "stock_move_transfer_list_action")
-        criteria = [
+        context = {}
+        domain = [
             ("date", ">=", self.date_start),
             ("date", "<=", self.date_end),
             ("picking_type_id.warehouse_id", "in", self.warehouse_ids.ids),
         ]
-        waction.domain = criteria
-        return waction.read()[0]
+        result = waction.read()[0]
+        result.update({"context": context, "domain": domain})
+        return result
