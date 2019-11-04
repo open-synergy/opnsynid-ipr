@@ -18,6 +18,14 @@ class PrintStockComplimentList(models.TransientModel):
         required=True,
     )
 
+    product_ids = fields.Many2many(
+        string="Product(s)",
+        comodel_name="product.product",
+        relation="rel_stock_compliment_list_2_product",
+        column1="wizard_id",
+        column2="product_id",
+    )
+
     @api.multi
     def action_print_xls(self):
         datas = {}
@@ -43,10 +51,16 @@ class PrintStockComplimentList(models.TransientModel):
         waction = self.env.ref(
             "ipr_stock_compliment_list."
             "stock_move_compliment_list_action")
-        criteria = [
+        context = {}
+        domain = [
             ("date", ">=", self.date_start),
             ("date", "<=", self.date_end),
             ("picking_type_id.warehouse_id", "in", self.warehouse_ids.ids),
         ]
-        waction.domain = criteria
-        return waction.read()[0]
+        if self.product_ids:
+            domain += [
+                ("product_id", "in", self.product_ids.ids)
+            ]
+        result = waction.read()[0]
+        result.update({"context": context, "domain": domain})
+        return result
