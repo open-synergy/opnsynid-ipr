@@ -18,6 +18,14 @@ class PrintStockTransferList(models.TransientModel):
         required=True,
     )
 
+    product_ids = fields.Many2many(
+        string="Product(s)",
+        comodel_name="product.product",
+        relation="rel_stock_trans_list_2_product",
+        column1="wizard_id",
+        column2="product_id",
+    )
+
     @api.multi
     def action_print_xls(self):
         datas = {}
@@ -49,6 +57,10 @@ class PrintStockTransferList(models.TransientModel):
             ("date", "<=", self.date_end),
             ("picking_type_id.warehouse_id", "in", self.warehouse_ids.ids),
         ]
+        if self.product_ids:
+            domain += [
+                ("product_id", "in", self.product_ids.ids)
+            ]
         result = waction.read()[0]
         result.update({"context": context, "domain": domain})
         return result
