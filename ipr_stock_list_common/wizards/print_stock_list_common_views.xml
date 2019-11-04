@@ -13,6 +13,7 @@
                 <field name="date_end"/>
                 <separator string="Warehouse(s)" colspan="2"/>
                 <field name="warehouse_ids"/>
+                <field name="product_ids"/>
                 <field name="output_format"/>
             </group>
             <footer>

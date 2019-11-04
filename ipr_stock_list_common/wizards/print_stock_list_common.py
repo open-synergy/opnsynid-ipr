@@ -33,6 +33,13 @@ class StockPrintListCommon(models.AbstractModel):
         column2="warehouse_id",
         required=True,
     )
+    product_ids = fields.Many2many(
+        string="Product(s)",
+        comodel_name="stock.warehouse",
+        relation="rel_print_list_2_product",
+        column1="wizard_id",
+        column2="product_id",
+    )
     output_format = fields.Selection(
         string="Output Format",
         required=True,
