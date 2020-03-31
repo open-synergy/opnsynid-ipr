@@ -90,13 +90,6 @@ class Parser(report_sxw.rml_parse):
                 uom_id = data_id.product_uom_id
                 uom_name = uom_id and uom_id.name or "-"
 
-                warehouse = data_id.warehouse_id
-                warehouse_name = (
-                    warehouse and
-                    warehouse.name or
-                    "-"
-                )
-
                 conv_date = self._convert_datetime_utc(
                     data_id.date)
 
