@@ -63,7 +63,7 @@ class StockMoveListCommon(models.AbstractModel):
     price_unit = fields.Float(
         string="Price",
         required=True,
-        digits=(16,2),
+        digits=(16, 2),
     )
     create_uid = fields.Many2one(
         string="User",
@@ -101,14 +101,14 @@ class StockMoveListCommon(models.AbstractModel):
                 y.uom_id AS product_uom_id,
                 B.picking_type_id AS picking_type_id,
                 A.create_uid AS create_uid,
-        	    CASE
-            		WHEN
-            		    Z.price_unit is NULL
-            		THEN
-            		    0.0
-        	    ELSE
-        		      Z.price_unit
-        	    END AS price_unit
+                CASE
+                    WHEN
+                        Z.price_unit is NULL
+                    THEN
+                        0.0
+                    ELSE
+                        Z.price_unit
+                END AS price_unit
         """
         return select_field_str
 
@@ -130,32 +130,38 @@ class StockMoveListCommon(models.AbstractModel):
     def _sub_join(self):
         sub_join_str = """
             LEFT JOIN (
-            	SELECT  A2.move_id,
-            		SUM(
-            		    CASE
-            		        WHEN
-            			    A3.value_text='real'
-            		        THEN
-            			    A1.cost * A1.qty
-            		    ELSE
-            		        A4.standard_price * A1.qty
-            		    END
-            		) AS price_unit
-            	FROM 	stock_quant AS A1
-            	JOIN	stock_quant_move_rel AS A2 ON A2.quant_id=A1.id
-            	JOIN	(
-            		SELECT 	value_text,
-            			CAST(split_part(res_id, ',', 2) AS INTEGER) AS product_id
-            		FROM 	ir_property
-            		WHERE	name='cost_method'
-            	) AS A3 ON A3.product_id=A1.product_id
-            	JOIN	(
-            		SELECT 	value_float AS standard_price,
-            			CAST(split_part(res_id, ',', 2) AS INTEGER) AS product_id
-            		FROM 	ir_property
-            		WHERE	name='standard_price'
-            	) AS A4 ON A4.product_id=A1.product_id
-            	GROUP BY A2.move_id
+                SELECT  A2.move_id,
+                    SUM(
+                        CASE
+                            WHEN
+                                A3.value_text='real'
+                            THEN
+                                A1.cost * A1.qty
+                            ELSE
+                                A4.standard_price * A1.qty
+                        END
+                    ) AS price_unit
+                FROM stock_quant AS A1
+                JOIN stock_quant_move_rel AS A2 ON A2.quant_id=A1.id
+                JOIN (
+                    SELECT
+                        value_text,
+                        CAST(
+                            split_part(res_id, ',', 2) AS INTEGER
+                        ) AS product_id
+                    FROM ir_property
+                    WHERE name='cost_method'
+                ) AS A3 ON A3.product_id=A1.product_id
+                JOIN (
+                    SELECT
+                        value_float AS standard_price,
+                        CAST(
+                            split_part(res_id, ',', 2) AS INTEGER
+                        ) AS product_id
+                    FROM ir_property
+                    WHERE name='standard_price'
+                ) AS A4 ON A4.product_id=A1.product_id
+                GROUP BY A2.move_id
             ) AS Z ON A.id=Z.move_id
         """
         return sub_join_str
