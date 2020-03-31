@@ -7,8 +7,16 @@
     <field name="model">stock.print_receive_list</field>
     <field name="inherit_id" ref="ipr_stock_list_common.stock_print_list_common_view_form"/>
     <field name="arch" type="xml">
-        <data>
-        </data>
+        <xpath expr="//field[@name='product_ids']" position="before">
+            <field name="company_id" invisible="1"/>
+            <field name="allowed_product_ids" widget="many2many_tags" invisible="1"/>
+            <field name="allowed_product_categ_ids" widget="many2many_tags" invisible="1"/>
+        </xpath>
+        <xpath expr="//field[@name='product_ids']" position="attributes">
+            <attribute name="domain">
+                ['|',('id','in',allowed_product_ids[0][2]),('categ_id','in',allowed_product_categ_ids[0][2])]
+            </attribute>
+        </xpath>
     </field>
 </record>
 

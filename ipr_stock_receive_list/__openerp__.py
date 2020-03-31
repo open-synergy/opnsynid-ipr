@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Stock Receive List Aeroo Report",
-    "version": "8.0.1.2.0",
+    "version": "8.0.1.3.0",
     "category": "Stock",
     "website": "https://opensynergy-indonesia.com/",
     "author": "OpenSynergy Indonesia",
@@ -19,5 +19,6 @@
         "reports/stock_receive_list.xml",
         "reports/stock_move_receive_list.xml",
         "wizards/print_stock_receive_list_views.xml",
+        "views/res_company_views.xml",
     ],
 }
