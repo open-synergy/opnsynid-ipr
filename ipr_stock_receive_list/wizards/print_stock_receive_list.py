@@ -18,6 +18,20 @@ class PrintStockReceiveList(models.TransientModel):
         required=True,
     )
 
+    allowed_product_ids = fields.Many2many(
+        string="Allowed Receive Products",
+        comodel_name="product.product",
+        related="company_id.allowed_receive_product_ids",
+        store=False,
+    )
+
+    allowed_product_categ_ids = fields.Many2many(
+        string="Allowed Receive Product Categories",
+        comodel_name="product.category",
+        related="company_id.allowed_receive_product_categ_ids",
+        store=False,
+    )
+
     product_ids = fields.Many2many(
         string="Product(s)",
         comodel_name="product.product",
