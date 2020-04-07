@@ -17,6 +17,14 @@ class PrintStockTransferList(models.TransientModel):
         column2="warehouse_id",
         required=True,
     )
+    warehouse_dest_ids = fields.Many2many(
+        string="Destination Warehouse(s)",
+        comodel_name="stock.warehouse",
+        relation="rel_stock_trans_list_2_warehouse_dest",
+        column1="wizard_id",
+        column2="warehouse_id",
+        required=True,
+    )
     allowed_product_ids = fields.Many2many(
         string="Allowed Receive Products",
         comodel_name="product.product",

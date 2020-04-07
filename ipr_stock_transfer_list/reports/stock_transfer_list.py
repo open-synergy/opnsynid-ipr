@@ -6,6 +6,9 @@ import time
 from openerp.report import report_sxw
 import pytz
 from datetime import datetime
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class Parser(report_sxw.rml_parse):
@@ -54,6 +57,7 @@ class Parser(report_sxw.rml_parse):
         self.date_start = self.form["date_start"]
         self.date_end = self.form["date_end"]
         self.warehouse_ids = self.form["warehouse_ids"]
+        self.warehouse_dest_ids = self.form["warehouse_dest_ids"]
         self.product_ids = self.form["product_ids"]
         return super(Parser, self).set_context(objects, data, ids, report_type)
 
@@ -64,10 +68,24 @@ class Parser(report_sxw.rml_parse):
         no = 1
 
         criteria = [
-            ("date", ">=", self.date_start),
-            ("date", "<=", self.date_end),
-            ("picking_type_id.warehouse_id", "in", self.warehouse_ids),
+            ("source_loc_wh_id", "in", self.warehouse_ids),
+            ("source_dest_loc_wh_id", "in", self.warehouse_dest_ids),
         ]
+
+        if self.date_start and self.date_end:
+            criteria += [
+                ("date", ">=", self.date_start),
+                ("date", "<=", self.date_end),
+            ]
+        elif not self.date_start and self.date_end:
+            criteria += [
+                ("date", "<=", self.date_end),
+            ]
+        elif self.date_start and not self.date_end:
+            criteria += [
+                ("date", ">=", self.date_start),
+            ]
+
         if self.product_ids:
             criteria += [
                 ("product_id", "in", self.product_ids)

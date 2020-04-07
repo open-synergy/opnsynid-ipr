@@ -11,6 +11,7 @@
     <field name="inherit_id" ref="ipr_stock_list_common.stock_print_list_common_view_form"/>
     <field name="arch" type="xml">
         <xpath expr="//field[@name='product_ids']" position="before">
+            <field name="warehouse_dest_ids"/>
             <field name="company_id" invisible="1"/>
             <field name="allowed_product_ids" widget="many2many_tags" invisible="1"/>
             <field name="allowed_product_categ_ids" widget="many2many_tags" invisible="1"/>
